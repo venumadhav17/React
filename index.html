@@ -7,32 +7,9 @@
     <title>Swiggy Website Clone</title>
   </head>
   <body>
-    <h1>Hello Top of Root</h1>
-    <!--React is working only inside div root -->
     <div id="root">
-      <!--react gets replaced -> Akshay is here is replaced not appended by h1 tag-->
-      <h1>Akshay is here</h1>
-      <!--React needs root to do dom manipulation-->
+      <h1>Not Rendered</h1>
     </div>
-    <h1>Hello Below of Root</h1>
-    <script
-      crossorigin
-      src="https://unpkg.com/react@18/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
-
-    <!--In React code Api is different from Javascript-->
-    <!--React takes 3 arguments-->
-    <script src="./App.js"></script>
+    <script type="module" src="./App.js"></script>
   </body>
 </html>
-
-<!--React is a library that can apply only to small portion of page-->
-<!-- Framework comes with a lot of things-->
-<!-- React is nothing but a JavaScript-->
-
-<!--Order of files matter-->
-<!--id='root' matters a lot-->
