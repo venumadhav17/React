@@ -19,3 +19,9 @@
 - Parcel provides to Host App in HTTPS
 - Tree Shaking - remove unused code
 - Different dev and prod bundles
+
+
+# Food Ordering App
+- Planning (UI Design, Wire frame, Mock)
+
+
