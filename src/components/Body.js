@@ -1,41 +1,32 @@
 import RestaurantCard from './RestaurantCard';
 import { useState, useEffect } from 'react';
 import Shimmer from './Shimmer';
+import { Link } from 'react-router-dom';
+import { RES_URL } from '../../utils/constants';
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState('');
 
-  // whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
   useEffect(() => {
     fetchData();
   }, []);
 
-  // use .then(), try catch blocks
-  // It will resolve promise
   const fetchData = async () => {
-    const data = await fetch(
-      'https://www.swiggy.com/mapi/homepage/getCards?lat=14.44840&lng=79.98880'
-    );
-    //console.log(data);
+    const data = await fetch(RES_URL);
     const json = await data.json();
+
     setListOfRestaurants(
-      // Optional Chaining
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurant(
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
-  // Conditional Rendering
-  /* if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  } */
-
+  //if (listOfRestaurants.length === 0) return <Shimmer />;
+  //if (filteredRestaurant.length === 0) return <Shimmer />;
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -52,14 +43,10 @@ const Body = () => {
           />
           <button
             onClick={() => {
-              /*const filteredRestaurant = listOfRestaurants.filter(
-                (res) => res.data.name === searchText
-              );*/
               const filteredRestaurant = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
 
-              // setListOfRestaurants(filteredRestaurant);
               setFilteredRestaurant(filteredRestaurant);
             }}
           >
@@ -72,18 +59,21 @@ const Body = () => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating >= 4.6
             );
-            setListOfRestaurants(filteredList);
+            //setListOfRestaurants(filteredList);
+            setFilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="res-container">
-        {/*{listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-        ))} */}
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={'/restaurants/' + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
@@ -91,3 +81,4 @@ const Body = () => {
 };
 
 export default Body;
+/* We can use listOfRestaurants.length === 0 (Conditional Rendering) inside before filteredRestaurant of map function */

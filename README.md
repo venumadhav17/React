@@ -66,3 +66,10 @@
 # Virtual Dom
 
 # React Fiber
+
+# Routing
+
+# 2 types Routing in web apps
+
+- Client Side Routing -
+- Server Side Routing - .index.html -> makes network call -> gets data -> render into UI (loads the component of particular page)-> Refreshes the whole page
