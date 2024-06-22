@@ -1,15 +1,15 @@
-import { CDN_URL } from '../../utils/constants.js';
+import { CDN_URL } from '../utils/constants';
 
 const RestaurantCard = (props) => {
   const { resData } = props;
 
-  console.log(resData);
+  //console.log(resData);
 
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =
     resData?.info;
 
   //const { deliveryTime } = resData?.info?.sla;
-  console.log(resData);
+  //console.log(resData);
 
   return (
     <div className="res-card">
